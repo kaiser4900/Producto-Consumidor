@@ -21,6 +21,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->progressBar->setValue(0);
 
+    connect(c2_thread, SIGNAL(marca_total(int)),ui->lcdNumber_tp,SLOT(display(int)));
+    connect(c3_thread, SIGNAL(marca_total(int)),ui->lcdNumber_tc1,SLOT(display(int)));
+    connect(c4_thread, SIGNAL(marca_total(int)),ui->lcdNumber_tc2,SLOT(display(int)));
+
     connect(c2_thread, &Productor::producir1, ui->progressBar, &QProgressBar::setValue);
     connect(c3_thread, &Consumidor::consumir1, ui->progressBar, &QProgressBar::setValue);
     connect(c4_thread, &Consumidor::consumir1, ui->progressBar, &QProgressBar::setValue);
@@ -52,29 +56,50 @@ void MainWindow::on_Iniciar_P_clicked()
     else {
         c2_thread->start();
     }
+    srand(time(NULL));
+    clock_t inicio = clock();
+    c2_thread->setinicio(inicio);
 }
 
 void MainWindow::on_detener_P_clicked()
 {
+    srand(time(NULL));
+    clock_t fin = clock();
+    c2_thread->setfin(fin);
+    c2_thread->total();
     c2_thread->terminate();
 }
 
 void MainWindow::on_iniciar_C_clicked()
 {
+    srand(time(NULL));
+    clock_t inicio = clock();
+    c3_thread->setinicio(inicio);
     c3_thread->start();
 }
 
 void MainWindow::on_detener_C_clicked()
 {
+    srand(time(NULL));
+    clock_t fin = clock();
+    c3_thread->setfin(fin);
+    c3_thread->total();
     c3_thread->terminate();
 }
 
 void MainWindow::on_iniciar_C_2_clicked()
 {
+    srand(time(NULL));
+    clock_t inicio = clock();
+    c4_thread->setinicio(inicio);
     c4_thread->start();
 }
 
 void MainWindow::on_detener_C_2_clicked()
 {
+    srand(time(NULL));
+    clock_t fin = clock();
+    c4_thread->setfin(fin);
+    c4_thread->total();
     c4_thread->terminate();
 }

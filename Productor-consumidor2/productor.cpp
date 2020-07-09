@@ -2,7 +2,6 @@
 #include <QMutex>
 #include "QRandomGenerator64"
 
-
 Productor::Productor(QObject *parent)
     :QThread (parent)
 {
@@ -63,4 +62,16 @@ void Productor :: setsize(int size0)
 void Productor :: setcanasta(int canasta0)
 {
     canasta = &canasta0;
+}
+void Productor :: setinicio(clock_t t0)
+{
+    inicio = t0;
+}
+void Productor :: setfin(clock_t t1)
+{
+    fin = t1;
+}
+void Productor :: total()
+{
+    emit marca_total(fin-inicio);
 }

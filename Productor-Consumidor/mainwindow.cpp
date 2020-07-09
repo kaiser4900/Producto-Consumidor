@@ -20,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->progressBar->setValue(0);
 
 
+    connect(c0_thread, SIGNAL(marca_total(int)),ui->lcdNumber_3,SLOT(display(int)));
+    connect(c1_thread, SIGNAL(marca_total(int)),ui->lcdNumber_4,SLOT(display(int)));
+
     connect(c0_thread, &Productor::producir1, ui->progressBar, &QProgressBar::setValue);
     connect(c1_thread, &Consumidor::consumir1, ui->progressBar, &QProgressBar::setValue);
 
@@ -56,19 +59,33 @@ void MainWindow::on_Iniciar_P_clicked()
     else {
         c0_thread->start();
     }
+    srand(time(NULL));
+    clock_t inicio = clock();
+    c0_thread->setinicio(inicio);
 }
 
 void MainWindow::on_detener_P_clicked()
 {
+    srand(time(NULL));
+    clock_t fin = clock();
+    c0_thread->setfin(fin);
+    c0_thread->total();
     c0_thread->terminate();
 }
 
 void MainWindow::on_iniciar_C_clicked()
 {
     c1_thread->start();
+    srand(time(NULL));
+    clock_t inicio = clock();
+    c1_thread->setinicio(inicio);
 }
 
 void MainWindow::on_detener_C_clicked()
 {
+    srand(time(NULL));
+    clock_t fin = clock();
+    c1_thread->setfin(fin);
+    c1_thread->total();
     c1_thread->terminate();
 }

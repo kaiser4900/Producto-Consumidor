@@ -38,3 +38,16 @@ void Consumidor :: setcanasta(int canasta0)
 {
     canasta = &canasta0;
 }
+
+void Consumidor :: setinicio(clock_t t0)
+{
+    inicio = t0;
+}
+void Consumidor :: setfin(clock_t t1)
+{
+    fin = t1;
+}
+void Consumidor :: total()
+{
+     emit marca_total(fin-inicio);
+}

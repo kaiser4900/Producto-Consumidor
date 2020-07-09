@@ -63,3 +63,15 @@ void Productor :: setcanasta(int canasta0)
 {
     canasta = &canasta0;
 }
+void Productor :: setinicio(clock_t t0)
+{
+    inicio = t0;
+}
+void Productor :: setfin(clock_t t1)
+{
+    fin = t1;
+}
+void Productor :: total()
+{
+    emit marca_total(fin-inicio);
+}
